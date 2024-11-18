@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+
+touch report.txt
+security_check() 
+{
+
+ echo "===== systeme security check======" >>report.txt
+ sudo find / -type f -perm -o+w | head -n 40 >>report.txt
+ 
+ echo "Users Unautorized (UID>=1000):" >>report.txt
+ awk -F : '$3 >= 1000 {print $1, $3}' /etc/passwd >>report.txt
+
+ echo "====================================">>report.txt 
+   
+ 
+
+}
+
+disk_usage_audit()
+{
+ echo "mmmm"
+}
+
+clean_unused_packages()
+{ 
+
+ echo "kkkkk"
+
+}
+
+security_check
+disk_usage_audit
+clean_unused_packages
+

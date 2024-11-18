@@ -1,0 +1,3 @@
+/var/log/bootstrap.log
+/var/log/faillog
+/var/log/fontconfig.log

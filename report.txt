@@ -1,0 +1,10 @@
+1485596	/var/lib
+1202428	/var/lib/snapd
+1025536	/var/lib/snapd/seed
+1025440	/var/lib/snapd/seed/snaps
+517216	/var/lib/snapd/seed/snaps/gnome-42-2204_176.snap
+344436	/var/cache
+297772	/var/cache/apt
+276244	/var/lib/snapd/seed/snaps/firefox_4793.snap
+195408	/var/cache/apt/archives
+190748	/var/lib/apt

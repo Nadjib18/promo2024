@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Variables
+DIRECTORY="/var/logs"
+BACKUP_DIRECTORY="/var/logs_backup"
+LOGFILE="/var/logs_cleanup.log"
+MAX_AGE=30    # jours
+MAX_SIZE=$((100 * 1024 * 1024))  # 100 Mo en octets
+TOTAL_FREED=0
+
+# Création du répertoire de sauvegarde si inexistant
+mkdir -p "$BACKUP_DIRECTORY"
+
+# Fonction pour nettoyer les fichiers
+cleanup_logs() {
+    echo "Début du nettoyage dans $DIRECTORY à $(date)" >> "$LOGFILE"
+    
+    # Trouver et traiter les fichiers obsolètes ou trop grands
+    find "$DIRECTORY" -type f \( -mtime +$MAX_AGE -o -size +$MAX_SIZE \) | while read -r file; do
+        FILE_SIZE=$(stat -c%s "$file")
+        # Sauvegarder le fichier avant de le supprimer
+        cp "$file" "$BACKUP_DIRECTORY"
+        echo "Sauvegarde de: $file vers $BACKUP_DIRECTORY" >> "$LOGFILE"
+        
+        # Suppression du fichier
+        rm -f "$file"
+        echo "Suppression de: $file (Taille: $FILE_SIZE octets)" >> "$LOGFILE"
+        TOTAL_FREED=$((TOTAL_FREED + FILE_SIZE))
+    done
+
+    # Enregistrer l'espace disque libéré
+    if [ $TOTAL_FREED -gt 0 ]; then
+        echo "Espace disque libéré: $TOTAL_FREED octets" >> "$LOGFILE"
+    else
+        echo "Aucun fichier à supprimer." >> "$LOGFILE"
+    fi
+
+    echo "Fin du nettoyage à $(date)" >> "$LOGFILE"
+
+}
+
+

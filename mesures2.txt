@@ -1,0 +1,7 @@
+nom de la mesure|lieu de la mesure|date de la mesure|valeur brute|correction 1|correction 2|correction 3|valeur corrigée|
+
+marcel|brest|18/12/1998|12.5|1.34|1.23|-1.5|13.47|
+
+polo|loctudy|21/05/1997|11.5|1.24|1.12|-1.2|12.66|
+
+otto|camaret|04/09/1995|9.3|0.98|1.17|-1.12|10.33|
